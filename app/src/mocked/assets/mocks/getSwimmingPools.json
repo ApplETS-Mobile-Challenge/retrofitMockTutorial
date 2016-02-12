@@ -1,0 +1,59 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "ID_UEV": "3116265",
+        "TYPE": "Piscine intérieure",
+        "NOM": "Sophie-Barat",
+        "ARRONDISSE": "Ahuntsic–Cartierville",
+        "ADRESSE": "10 851, Rue Saint-Charles, H2C 3H7",
+        "PROPRIETE": "Municipale",
+        "GESTION": "Municipale",
+        "POINT_X": "291703,7809",
+        "POINT_Y": "5046899,148",
+        "EQUIPEME": "Piscine compétitive",
+        "LONG": "-73.667771",
+        "LAT": "45.561879"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.667771,
+          45.561879
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "ID_UEV": "3114253",
+        "TYPE": "Piscine intérieure",
+        "NOM": "ETE",
+        "ARRONDISSE": "Ahuntsic–Cartierville",
+        "ADRESSE": "1 000, Avenue Émile-Journealt Est",
+        "PROPRIETE": "Municipale",
+        "GESTION": "Municipale",
+        "POINT_X": "294151,2717",
+        "POINT_Y": "5045855,457",
+        "EQUIPEME": "Complexe aquatique",
+        "LONG": "-73.63639",
+        "LAT": "45.552526"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.63639,
+          45.552526
+        ]
+      }
+    }
+  ]
+}
