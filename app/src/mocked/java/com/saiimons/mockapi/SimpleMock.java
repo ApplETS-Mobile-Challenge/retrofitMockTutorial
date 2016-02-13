@@ -4,7 +4,7 @@ import retrofit2.mock.BehaviorDelegate;
 import rx.Observable;
 
 /**
- * Created by saiimons on 16-02-11.
+ * Create a simple mock with pre-defined POJOs
  */
 public class SimpleMock implements SwimmingPoolsApi {
     private final BehaviorDelegate<SwimmingPoolsApi> delegate;

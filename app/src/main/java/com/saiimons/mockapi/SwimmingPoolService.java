@@ -15,14 +15,27 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class SwimmingPoolService {
     private final SwimmingPoolServiceDelegate delegate;
 
+    /**
+     * Create the service which will provide the API.
+     * The instantiated delegate contains the implementation.
+     *
+     * @param context as usual
+     */
     public SwimmingPoolService(Context context) {
         delegate = new SwimmingPoolServiceImpl(context);
     }
 
+    /**
+     * Get the API implementation
+     * @return the API implementation
+     */
     public SwimmingPoolsApi getApi() {
         return delegate.getApi();
     }
 
+    /**
+     * Default Delegate class
+     */
     public static class SwimmingPoolServiceDelegate {
 
         protected final Context context;
@@ -31,18 +44,40 @@ public class SwimmingPoolService {
             this.context = context;
         }
 
+        /**
+         * Create the default Retrofit Builder
+         *
+         * @return the default Retrofit Builder
+         */
         protected Retrofit.Builder getRetrofitBuilder() {
-            Gson gson = new GsonBuilder().registerTypeAdapter(SwimmingPool.class, new SwimmingPool.Parser()).create();
+            // The service has a specific parser
+            Gson gson = new GsonBuilder()
+                    .registerTypeAdapter(
+                            SwimmingPool.class,
+                            new SwimmingPool.Parser()
+                    )
+                    .create();
+
             return new Retrofit.Builder()
                     .baseUrl("http://donnees.ville.montreal.qc.ca/")
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(gson));
         }
 
+        /**
+         * Create the Retrofit instance
+         *
+         * @return the Retrofit instance
+         */
         protected Retrofit getRetrofit() {
             return getRetrofitBuilder().build();
         }
 
+        /**
+         * Create the SwimmingPoolsApi
+         *
+         * @return the SwimmingPoolsApi
+         */
         public SwimmingPoolsApi getApi() {
             return getRetrofit().create(SwimmingPoolsApi.class);
         }

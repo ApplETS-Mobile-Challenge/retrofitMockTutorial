@@ -21,7 +21,7 @@ import retrofit2.mock.Calls;
 /**
  * Created by saiimons on 16-02-11.
  */
-public class RockingMock {
+public class AlmostJakeWhartonMock {
     public static <T> T create(Context context, BehaviorDelegate<SwimmingPoolsApi> delegate, Retrofit retrofit, Class<T> service) {
         ClassLoader loader = service.getClassLoader();
         Class<?>[] interfaces = new Class<?>[]{service};
@@ -46,7 +46,10 @@ public class RockingMock {
                 return method.invoke(this, args);
             }
             try {
-                Converter<ResponseBody, ?> converter = retrofit.responseBodyConverter(((ParameterizedType) method.getGenericReturnType()).getActualTypeArguments()[0], method.getAnnotations());
+                Converter<ResponseBody, ?> converter = retrofit.responseBodyConverter(
+                        ((ParameterizedType) method.getGenericReturnType()).getActualTypeArguments()[0],
+                        method.getAnnotations()
+                );
                 String contents = readContentsFromAsset(context, "mocks/" + method.getName() + ".json");
                 ResponseBody body = ResponseBody.create(MediaType.parse("application/json"), contents);
                 Object obj = converter.convert(body);

@@ -16,7 +16,7 @@ import retrofit2.mock.Calls;
 import rx.Observable;
 
 /**
- * Created by saiimons on 16-02-11.
+ * More advanced mock, parsing a JSON from the assets.
  */
 public class AdvancedMock implements SwimmingPoolsApi {
     private final Context context;

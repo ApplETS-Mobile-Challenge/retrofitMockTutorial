@@ -31,12 +31,20 @@ public class SwimmingPoolServiceImpl extends SwimmingPoolService.SwimmingPoolSer
 
         // Finally handle the mock
         // Simple Mock with Pojos
-        return new SimpleMock(delegate);
+        //return new SimpleMock(delegate);
+
+
+
+
 
         // Mock the object byy handling json
-        //return new AdvancedMock(context, delegate, retrofit);
+        return new AdvancedMock(context, delegate, retrofit);
+
+
+
+
 
         // Mock the object using a proxy
-        //return RockingMock.create(context, delegate, retrofit, SwimmingPoolsApi.class);
+        // return AlmostJakeWhartonMock.create(context, delegate, retrofit, SwimmingPoolsApi.class);
     }
 }

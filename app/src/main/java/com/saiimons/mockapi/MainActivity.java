@@ -15,10 +15,9 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends RxAppCompatActivity implements Action1<SwimmingPoolList> {
+public class MainActivity extends RxAppCompatActivity {
 
     private PoolAdapter adapter;
     private SwipeRefreshLayout refreshLayout;
@@ -28,19 +27,21 @@ public class MainActivity extends RxAppCompatActivity implements Action1<Swimmin
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Set up the list
         RecyclerView recyclerView = ((RecyclerView) findViewById(R.id.results));
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         adapter = new PoolAdapter();
         recyclerView.setAdapter(adapter);
-
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
 
+        // Subscribe to the swipe => Emit a network request
         Observable<Observable<SwimmingPoolList>> swipes = RxSwipeRefreshLayout
                 .refreshes(refreshLayout)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(Schedulers.io())
                 .map(nil -> new SwimmingPoolService(this).getApi().getSwimmingPools());
 
+        // Stop the refresh when the request has worked or failed
         Observable
                 .switchOnNext(swipes)
                 .compose(bindToLifecycle())
@@ -52,14 +53,9 @@ public class MainActivity extends RxAppCompatActivity implements Action1<Swimmin
                         },
                         throwable -> {
                             refreshLayout.setRefreshing(false);
-                            Snackbar.make(refreshLayout, throwable.getMessage(), Snackbar.LENGTH_SHORT);
+                            Snackbar.make(refreshLayout, throwable.getMessage(), Snackbar.LENGTH_SHORT).show();
                         }
                 );
-
-    }
-
-    @Override
-    public void call(SwimmingPoolList swimmingPoolList) {
 
     }
 
